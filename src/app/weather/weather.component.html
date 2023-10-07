@@ -1,0 +1,66 @@
+<div class="container mt-5">
+  <h2>Today's Weather</h2>
+  <!-- <h4>{{ day.dt_txt | date: 'shortDate' }}</h4> -->
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="input-group mb-3">
+        <input
+          type="text" class="form-control" id="cityInput" [(ngModel)]="cityName"
+          (keyup.enter)="getWeather()" placeholder="Enter City"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button" (click)="getWeather()">Enter</button>
+          <button class="btn btn-secondary" type="button" (click)="resetWeather()">Refresh</button>
+          <button class="btn btn-info" [routerLink]="['/forecast']">5-Day Forecast</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card text-white bg-primary">
+        <div class="card-header text-center">
+          <img src="{{ iconURL }}" alt="weather image" />
+          <h2>{{ cityName }}</h2>
+        </div>
+        <div class="card-body text-center">
+          <p class="card-text">Summary: {{ summary }}</p>
+          <p class="card-text">
+            <i class="fa-solid fa-cloud"></i>Temperature: {{ temperature }} °{{
+              units == "imperial" ? "F" : "C"
+            }}
+          </p>
+          <p class="card-text">
+            Feels like: {{ feelsLikeTemp }} °{{
+              units == "imperial" ? "F" : "C"
+            }}
+          </p>
+          <p class="card-text">Pressure: {{ pressure }} hPa</p>
+          <p class="card-text">Humidity: {{ humidity }} %</p>
+        </div>
+        <div class="card-footer bg-transparent border-success">
+          <form class="myRadioButtons">
+            <label class="radio-inline">
+              <input
+                type="radio"
+                (change)="onRadioButtonChange()"
+                name="unitsRadioButtons"
+                [checked]="units == 'imperial' ? true : false"
+              />°F
+            </label>
+            <label class="radio-inline">
+              <input
+                type="radio"
+                (change)="onRadioButtonChange()"
+                name="unitsRadioButtons"
+              />°C
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
